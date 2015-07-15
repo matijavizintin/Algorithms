@@ -10,7 +10,7 @@ import java.util.Set;
  * Date: 29. 05. 2015
  * Time: 15.30
  */
-public class PowerSet implements Collection<Set<Integer>> {
+public class PowerSet implements Iterable<Set<Integer>> {
     private Collection<Integer> input;
     private int powerSetSize;
 
@@ -19,56 +19,8 @@ public class PowerSet implements Collection<Set<Integer>> {
         this.powerSetSize = Double.valueOf(Math.pow(2., Integer.valueOf(input.size()).doubleValue())).intValue();
     }
 
-    @Override public int size() {
-        return powerSetSize;
-    }
-
-    @Override public boolean isEmpty() {
-        return input.isEmpty();
-    }
-
-    @Override public boolean contains(Object o) {
-        return false;
-    }
-
     @Override public Iterator<Set<Integer>> iterator() {
         return new PowerSetIterator(input, powerSetSize);
-    }
-
-    @Override public Object[] toArray() {
-        return new Object[0];
-    }
-
-    @Override public <T> T[] toArray(T[] a) {
-        return null;
-    }
-
-    @Override public boolean add(Set<Integer> integers) {
-        return false;
-    }
-
-    @Override public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override public boolean addAll(Collection<? extends Set<Integer>> c) {
-        return false;
-    }
-
-    @Override public boolean removeAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override public boolean retainAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override public void clear() {
-
     }
 }
 

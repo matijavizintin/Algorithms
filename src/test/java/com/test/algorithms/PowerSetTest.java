@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.StreamSupport;
 
 /**
  * Created by Matija Vižintin
@@ -19,7 +20,7 @@ public class PowerSetTest {
 
     @Test
     public void test() {
-        IntStream.range(1, 25).forEach(this::makeTest);
+        IntStream.range(1, 28).forEach(this::makeTest);
     }
 
     int dummy = 0;
@@ -37,13 +38,15 @@ public class PowerSetTest {
 
         // test power set as iterator
         Stopwatch sw2 = Stopwatch.createStarted();
-        new PowerSet(input).stream().forEach(i -> i.stream().forEach(j -> dummy += j));
+        StreamSupport.stream(new PowerSet(input).spliterator(), false).forEach(i -> i.stream().forEach(j -> dummy += j));
         long elapsed2 = sw2.stop().elapsed(TimeUnit.MILLISECONDS);
 
         // test power set as iterator as parallel stream
         Stopwatch sw3 = Stopwatch.createStarted();
-        new PowerSet(input).stream().forEach(i -> i.stream().forEach(j -> dummy += j));
+        StreamSupport.stream(new PowerSet(input).spliterator(), false).forEach(i -> i.stream().forEach(j -> dummy += j));
         long elapsed3 = sw3.stop().elapsed(TimeUnit.MILLISECONDS);
+
+
 
         // guava implementation
         Stopwatch sw4 = Stopwatch.createStarted();
